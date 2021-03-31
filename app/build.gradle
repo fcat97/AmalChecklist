@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+
+    // -------------------------------------------------------------------------------------------- //
+    // Automating Version Numbering
+    // https://stackoverflow.com/questions/21405457/autoincrement-versioncode-with-gradle-extra-properties
+    // answer by: Ahmad Aghazadeh
+
+    def _versionCode = 0
+    def _major = 0
+    def _minor = 0
+    def _patch = 0
+
+    def versionPropsFile = file('version.properties')
+    if (versionPropsFile.canRead()) {
+        Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        _patch = versionProps['PATCH'].toInteger() + 1
+        _major = versionProps['MAJOR'].toInteger()
+        _minor = versionProps['MINOR'].toInteger()
+        _versionCode= versionProps['VERSION_CODE'].toInteger() + 1
+        if(_patch == 100)
+        {
+            _patch = 0
+            _minor =_minor + 1
+        }
+        if(_minor == 10){
+            _minor = 0
+            _major =_major + 1
+        }
+
+        versionProps['MAJOR'] =_major.toString()
+        versionProps['MINOR'] =_minor.toString()
+        versionProps['PATCH'] =_patch.toString()
+        versionProps['VERSION_CODE']=_versionCode.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+    }
+    else {
+        throw new GradleException("Could not read version.properties!")
+    }
+    def _versionName = "${_major}.${_minor}.${_patch}"
+
+    // ------------------------------------------------------------------------------------------- //
+
+    defaultConfig {
+        applicationId "media.uqab.amalchecklist"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode _versionCode
+        versionName _versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+
+    def lifecycle_version = "2.2.0"
+    def room_version = "2.2.5"
+    /*ViewModel and LiveData (New Style-in one Line)*/
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    /*Room Dependencies*/
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    //Library for Json
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Neumorphism
+    implementation 'com.github.fornewid:neumorphism:0.3.0'
+}

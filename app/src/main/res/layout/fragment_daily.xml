@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_small"
+        android:layout_alignParentEnd="true">
+        <TextView
+            android:id="@+id/day_1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:textAppearance="@style/textSmall"
+            android:textAlignment="center"
+            android:text="Wed\n31"/>
+        <TextView
+            android:id="@+id/day_2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:textAppearance="@style/textSmall"
+            android:textAlignment="center"
+            android:text="Tue\n30"/>
+        <TextView
+            android:id="@+id/day_3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:textAppearance="@style/textSmall"
+            android:textAlignment="center"
+            android:text="Mon\n29"/>
+        <TextView
+            android:id="@+id/day_4"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:textAppearance="@style/textSmall"
+            android:textAlignment="center"
+            android:text="Sun\n28"/>
+        <TextView
+            android:id="@+id/day_5"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:textAppearance="@style/textSmall"
+            android:textAlignment="center"
+            android:text="Sat\n27"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_amal"
+        android:layout_below="@id/linearLayout"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</RelativeLayout>

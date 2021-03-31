@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Amal Checklist</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="something_as_text">Something as Text</string>
+    <string name="confirm_text">Confirm</string>
+</resources>

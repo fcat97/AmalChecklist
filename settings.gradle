@@ -1,0 +1,2 @@
+rootProject.name = "Amal Checklist"
+include ':app'
