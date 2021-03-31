@@ -1,10 +1,12 @@
 package media.uqab.amalchecklist;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -17,6 +19,7 @@ import java.util.Calendar;
 public class AmalAdapter extends ListAdapter<Amal, AmalAdapter.AmalHolder> {
     private ItemClickListener listener;
     private ItemChangeListener itemChangeListener;
+    private Context context;
 
     protected AmalAdapter() {
         super(DIFF_CALLBACK);
@@ -40,6 +43,8 @@ public class AmalAdapter extends ListAdapter<Amal, AmalAdapter.AmalHolder> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_amal, parent, false);
 
+        context = parent.getContext();
+
         return new AmalHolder(view);
     }
 
@@ -48,9 +53,12 @@ public class AmalAdapter extends ListAdapter<Amal, AmalAdapter.AmalHolder> {
 
         Amal amal = getItem(position);
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.itemView.setOnLongClickListener(v -> {
             if (listener != null) listener.onClick(amal);
+            return true;
         });
+
+        holder.itemView.setOnClickListener(v -> Toast.makeText(context, amal.label, Toast.LENGTH_SHORT).show());
 
         holder.label_tv.setText(amal.label);
 
