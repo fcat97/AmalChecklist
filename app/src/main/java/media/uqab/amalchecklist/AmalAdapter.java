@@ -1,6 +1,12 @@
 package media.uqab.amalchecklist;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.ColorMatrix;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -51,6 +58,11 @@ public class AmalAdapter extends ListAdapter<Amal, AmalAdapter.AmalHolder> {
     @Override
     public void onBindViewHolder(@NonNull AmalAdapter.AmalHolder holder, int position) {
 
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        @ColorInt int colorPrimary = typedValue.data;
+
         Amal amal = getItem(position);
 
         holder.itemView.setOnLongClickListener(v -> {
@@ -73,21 +85,52 @@ public class AmalAdapter extends ListAdapter<Amal, AmalAdapter.AmalHolder> {
         calendar.add(Calendar.DATE, -1);
         boolean day_5 = amal.history.getState(calendar);
 
-        if (day_1) holder.iv_day_1.setImageResource(R.drawable.ic_check);
-        else holder.iv_day_1.setImageResource(R.drawable.ic_close);
+        if (day_1) {
+            holder.iv_day_1.setImageResource(R.drawable.ic_check);
+            holder.iv_day_1.setColorFilter(colorPrimary);
+        }
+        else {
+            holder.iv_day_1.setImageResource(R.drawable.ic_close);
+            holder.iv_day_1.setColorFilter(Color.LTGRAY);
+        }
 
-        if (day_2) holder.iv_day_2.setImageResource(R.drawable.ic_check);
-        else holder.iv_day_2.setImageResource(R.drawable.ic_close);
+        if (day_2) {
+            holder.iv_day_2.setImageResource(R.drawable.ic_check);
+            holder.iv_day_2.setColorFilter(colorPrimary);
+        }
+        else {
+            holder.iv_day_2.setImageResource(R.drawable.ic_close);
+            holder.iv_day_2.setColorFilter(Color.LTGRAY);
+        }
 
-        if (day_3) holder.iv_day_3.setImageResource(R.drawable.ic_check);
-        else holder.iv_day_3.setImageResource(R.drawable.ic_close);
+        if (day_3) {
+            holder.iv_day_3.setImageResource(R.drawable.ic_check);
+            holder.iv_day_3.setColorFilter(colorPrimary);
+        }
+        else {
+            holder.iv_day_3.setImageResource(R.drawable.ic_close);
+            holder.iv_day_3.setColorFilter(Color.LTGRAY);
+        }
 
-        if (day_4) holder.iv_day_4.setImageResource(R.drawable.ic_check);
-        else holder.iv_day_4.setImageResource(R.drawable.ic_close);
+        if (day_4) {
+            holder.iv_day_4.setImageResource(R.drawable.ic_check);
+            holder.iv_day_4.setColorFilter(colorPrimary);
+        }
+        else {
+            holder.iv_day_4.setImageResource(R.drawable.ic_close);
+            holder.iv_day_4.setColorFilter(Color.LTGRAY);
+        }
 
-        if (day_5) holder.iv_day_5.setImageResource(R.drawable.ic_check);
-        else holder.iv_day_5.setImageResource(R.drawable.ic_close);
+        if (day_5) {
+            holder.iv_day_5.setImageResource(R.drawable.ic_check);
+            holder.iv_day_5.setColorFilter(colorPrimary);
+        }
+        else {
+            holder.iv_day_5.setImageResource(R.drawable.ic_close);
+            holder.iv_day_5.setColorFilter(Color.LTGRAY);
+        }
 
+        // Set onLongClickListener -----------------------------------------------------------------
         holder.iv_day_1.setOnLongClickListener(v -> {
             Calendar c = Calendar.getInstance();
             amal.history.commit(c, ! day_1);
@@ -131,6 +174,13 @@ public class AmalAdapter extends ListAdapter<Amal, AmalAdapter.AmalHolder> {
             notifyItemChanged(position);
             return true;
         });
+
+        // Set onClickListener ---------------------------------------------------------------------
+        holder.iv_day_1.setOnClickListener(v -> Toast.makeText(context, "Hold to change", Toast.LENGTH_SHORT).show());
+        holder.iv_day_2.setOnClickListener(v -> Toast.makeText(context, "Hold to change", Toast.LENGTH_SHORT).show());
+        holder.iv_day_3.setOnClickListener(v -> Toast.makeText(context, "Hold to change", Toast.LENGTH_SHORT).show());
+        holder.iv_day_4.setOnClickListener(v -> Toast.makeText(context, "Hold to change", Toast.LENGTH_SHORT).show());
+        holder.iv_day_5.setOnClickListener(v -> Toast.makeText(context, "Hold to change", Toast.LENGTH_SHORT).show());
 
 
     }
