@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ public class FragmentAdd extends BottomSheetDialogFragment {
     private Button confirmButton;
     private Amal amal;
     private ConfirmListener confirmListener;
+    private RadioGroup radioGroup;
 
     public FragmentAdd(Amal amal) {
         this.amal = amal;
@@ -34,6 +36,7 @@ public class FragmentAdd extends BottomSheetDialogFragment {
         daily_rb = view.findViewById(R.id.rb_daily);
         weekly_rb = view.findViewById(R.id.rb_weekly);
         confirmButton = view.findViewById(R.id.confirm_button);
+        radioGroup = view.findViewById(R.id.radio_group);
 
         return view;
     }
@@ -45,6 +48,7 @@ public class FragmentAdd extends BottomSheetDialogFragment {
         label_et.setText(amal.label);
         daily_rb.setChecked(amal.type == AmalType.DAILY);
         weekly_rb.setChecked(amal.type == AmalType.WEEKLY);
+        radioGroup.setVisibility(View.GONE); // Todo: remove for weekly amal
 
         confirmButton.setOnClickListener(v -> {
             String label = label_et.getText().toString().trim();
@@ -54,8 +58,10 @@ public class FragmentAdd extends BottomSheetDialogFragment {
             }
 
             amal.label = label;
-            if (daily_rb.isChecked()) amal.type = AmalType.DAILY;
-            else if (weekly_rb.isChecked()) amal.type = AmalType.WEEKLY;
+            amal.type = AmalType.DAILY;
+            // TODO: uncomment for weekly amal
+//            if (daily_rb.isChecked()) amal.type = AmalType.DAILY;
+//            else if (weekly_rb.isChecked()) amal.type = AmalType.WEEKLY;
 
             if (confirmListener != null) {
                 confirmListener.onConfirm(amal);

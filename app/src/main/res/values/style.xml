@@ -26,6 +26,7 @@
     </style>
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
         <item name="backgroundTint">?attr/colorAccent</item>
+        <item name="fontFamily">@font/josefin_regular</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
@@ -33,17 +34,24 @@
     <style name="textRegular">
         <item name="android:textSize">14sp</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:fontFamily">@font/open_sans_regular</item>
+        <item name="android:fontFamily">@font/josefin_regular</item>
     </style>
+
+    <style name="textRegularOliciy">
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/oliciy</item>
+    </style>
+
 
     <style name="textRegular.bold" parent="textRegular">
         <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/open_sans_bold</item>
+        <item name="android:fontFamily">@font/josefin_bold</item>
     </style>
 
     <style name="textRegular.italic" parent="textRegular">
         <item name="android:textStyle">italic</item>
-        <item name="android:fontFamily">@font/open_sans_light_italic</item>
+        <item name="android:fontFamily">@font/josefin_light_italic</item>
     </style>
 
     <style name="textSmall" parent="textRegular">
@@ -58,12 +66,12 @@
     </style>
     <style name="textLarge">
         <item name="android:textSize">24sp</item>
-        <item name="fontFamily">@font/open_sans_regular</item>
+        <item name="fontFamily">@font/josefin_regular</item>
         <item name="background">@android:color/transparent</item>
     </style>
     <style name="textLarge.Bold">
         <item name="android:textSize">24sp</item>
-        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="fontFamily">@font/josefin_bold</item>
         <item name="background">@android:color/transparent</item>
     </style>
 

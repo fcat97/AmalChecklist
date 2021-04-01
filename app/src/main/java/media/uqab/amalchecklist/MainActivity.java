@@ -40,15 +40,19 @@ public class MainActivity extends AppCompatActivity {
                 .setAmalLiveData(dailyAmal)
                 .setItemClickListener(this::openFragmentAdd)
                 .setItemChangedListener(this::updateAmal);
-        fragmentWeekly = new FragmentAmal()
-                .setAmalLiveData(weeklyAmal)
-                .setItemClickListener(this::openFragmentAdd)
-                .setItemChangedListener(this::updateAmal);
-
-        viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle()));
-        tabLayout = findViewById(R.id.tab_layout);
-        new TabPagerBinder(tabLayout, viewPager);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, fragmentDaily)
+                .commit();
+//
+//        fragmentWeekly = new FragmentAmal()
+//                .setAmalLiveData(weeklyAmal)
+//                .setItemClickListener(this::openFragmentAdd)
+//                .setItemChangedListener(this::updateAmal);
+//
+//        viewPager = findViewById(R.id.viewPager);
+//        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle()));
+//        tabLayout = findViewById(R.id.tab_layout);
+//        new TabPagerBinder(tabLayout, viewPager);
 
         addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(v -> {

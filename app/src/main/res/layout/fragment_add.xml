@@ -11,8 +11,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/textLarge"
         android:padding="@dimen/dimen_small"
+        android:hint="@string/amal_name"
+        android:textAlignment="center"
         android:background="@drawable/edit_text_background"/>
     <RadioGroup
+        android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
